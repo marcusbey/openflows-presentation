@@ -1,0 +1,1413 @@
+<!DOCTYPE html><html lang="en"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>OPENFLOWS.AI - Strategic Roadmap</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #64748b;
+            --accent: #0ea5e9;
+            --surface: #f8fafc;
+            --text: #0f172a;
+            --text-muted: #64748b;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+        
+        .serif {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .toc-fixed {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 280px;
+            height: 100vh;
+            background: white;
+            border-right: 1px solid #e2e8f0;
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 2rem 1.5rem;
+        }
+        
+        .main-content {
+            margin-left: 280px;
+            max-width: 100%;
+        }
+        
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: center;
+            min-height: 60vh;
+        }
+        
+        .highlight-box {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+            color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .highlight-box::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: shimmer 4s ease-in-out infinite;
+        }
+        
+        @keyframes shimmer {
+            0%, 100% { transform: rotate(0deg); }
+            50% { transform: rotate(180deg); }
+        }
+        
+        .stat-card {
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .section-divider {
+            height: 1px;
+            background: linear-gradient(to right, transparent, #e2e8f0, transparent);
+            margin: 4rem 0;
+        }
+        
+        /* Mermaid diagram styling */
+        .mermaid-container {
+            display: flex;
+            justify-content: center;
+            min-height: 300px;
+            max-height: 800px;
+            background: #ffffff;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mermaid-container .mermaid {
+            width: 100%;
+            max-width: 100%;
+            height: 100%;
+            cursor: grab;
+            transition: transform 0.3s ease;
+            transform-origin: center center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            touch-action: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mermaid-container .mermaid svg {
+            max-width: 100%;
+            height: 100%;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .mermaid-container .mermaid:active {
+            cursor: grabbing;
+        }
+
+        .mermaid-container.zoomed .mermaid {
+            height: 100%;
+            width: 100%;
+            cursor: grab;
+        }
+
+        .mermaid-controls {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 10px;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .mermaid-control-btn {
+            background: #ffffff;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            padding: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: #374151;
+            font-size: 14px;
+            min-width: 36px;
+            height: 36px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .mermaid-control-btn:hover {
+            background: #f8fafc;
+            border-color: #3b82f6;
+            color: #3b82f6;
+            transform: translateY(-1px);
+        }
+
+        .mermaid-control-btn:active {
+            transform: scale(0.95);
+        }
+        
+        @media (max-width: 1024px) {
+            .toc-fixed {
+                transform: translateX(-100%);
+                transition: transform 0.3s ease;
+                z-index: 1000;
+            }
+            .toc-fixed.open {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+            .mermaid-control-btn:not(.reset-zoom) {
+                display: none;
+            }
+            .mermaid-controls {
+                top: auto;
+                bottom: 15px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            section {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            
+            .hero-grid {
+                min-height: auto;
+                gap: 1rem;
+            }
+            
+            .hero-grid h1 {
+                font-size: 2.5rem;
+                line-height: 1.2;
+            }
+            
+            .hero-grid p {
+                font-size: 1rem;
+            }
+            
+            .highlight-box, .stat-card {
+                word-wrap: break-word;
+            }
+        }
+    </style>
+  </head>
+
+  <body>
+    <!-- Table of Contents -->
+    <nav class="toc-fixed" id="toc">
+      <div class="mb-8">
+        <h2 class="text-lg font-bold text-slate-900 mb-4">OPENFLOWS.AI</h2>
+        <p class="text-sm text-slate-600">Strategic Roadmap</p>
+      </div>
+
+      <ul class="space-y-2 text-sm">
+        <li>
+          <a href="#executive-summary" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Executive Summary</a>
+        </li>
+        <li>
+          <a href="#market-opportunity" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Market Opportunity</a>
+        </li>
+        <li>
+          <a href="#competitive-landscape" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Competitive Landscape</a>
+        </li>
+        <li>
+          <a href="#service-offerings" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Service Offerings</a>
+        </li>
+        <li>
+          <a href="#industry-verticals" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Industry Verticals</a>
+        </li>
+        <li>
+          <a href="#go-to-market" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Go-to-Market</a>
+        </li>
+        <li>
+          <a href="#operational-execution" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Operational Execution</a>
+        </li>
+        <li>
+          <a href="#implementation-roadmap" class="block py-2 px-3 rounded hover:bg-slate-100 text-slate-700 hover:text-slate-900 transition-colors">Implementation Roadmap</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section class="px-8 py-12">
+        <div class="hero-grid max-w-7xl mx-auto">
+          <div class="space-y-6">
+            <h1 class="serif text-5xl font-bold text-slate-900 leading-tight">
+              <em class="text-blue-900">OPENFLOWS.AI</em>
+              <br/>
+              Strategic Roadmap
+            </h1>
+            <p class="text-xl text-slate-600 leading-relaxed">
+              Becoming Canada&#39;s premier AI consulting and automation agency through advanced workflow design and agentic application development.
+            </p>
+            <div class="flex items-center space-x-4 text-sm text-slate-500">
+              <span><i class="fas fa-map-marker-alt mr-2"></i>Canadian Headquarters</span>
+              <span><i class="fas fa-globe mr-2"></i>Global Ambition</span>
+            </div>
+          </div>
+
+          <div class="highlight-box">
+            <div class="relative z-10">
+              <h2 class="serif text-2xl font-bold mb-4">Market Opportunity</h2>
+              <div class="grid grid-cols-2 gap-4">
+                <div>
+                  <div class="text-3xl font-bold">$197.68B</div>
+                  <div class="text-sm opacity-90">Global AI Services by 2029</div>
+                </div>
+                <div>
+                  <div class="text-3xl font-bold">51.0%</div>
+                  <div class="text-sm opacity-90">CAGR 2024-2033</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Executive Summary -->
+      <section id="executive-summary" class="px-8 py-16 bg-white">
+        <div class="max-w-4xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Executive Summary</h2>
+
+          <div class="prose prose-lg max-w-none">
+            <p class="text-xl text-slate-700 leading-relaxed mb-6">
+              OPENFLOWS.AI is strategically positioned to become a leading AI consulting and automation agency, leveraging robust global and Canadian market growth, particularly in AI consulting, automation, and agentic AI.
+            </p>
+
+            <div class="grid md:grid-cols-3 gap-6 my-8">
+              <div class="stat-card">
+                <div class="text-2xl font-bold text-blue-900 mb-2">Strategy</div>
+                <div class="text-sm text-slate-600">AI Consulting &amp; Roadmapping</div>
+              </div>
+              <div class="stat-card">
+                <div class="text-2xl font-bold text-blue-900 mb-2">Build</div>
+                <div class="text-sm text-slate-600">Automation Workflows</div>
+              </div>
+              <div class="stat-card">
+                <div class="text-2xl font-bold text-blue-900 mb-2">Operate</div>
+                <div class="text-sm text-slate-600">Agentic Applications</div>
+              </div>
+            </div>
+
+            <p class="text-slate-700 leading-relaxed">
+              Our comprehensive service offerings, spanning strategy, build, and operate phases, are tailored to key industries and supported by a flexible pricing model and a strong go-to-market strategy focused on delivering rapid ROI and leveraging Canadian expertise.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Market Opportunity -->
+      <section id="market-opportunity" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Market Opportunity &amp; Validation</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Global AI Services Market</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Market Size 2024</span>
+                  <span class="font-bold text-blue-900">$26.15B</span>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Projected 2029</span>
+                  <span class="font-bold text-blue-900">$197.68B</span>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
+                  <span class="font-medium">CAGR 2024-2033</span>
+                  <span class="font-bold text-blue-900">51.0%</span>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <h4 class="font-bold text-slate-900 mb-4">Key Growth Drivers</h4>
+                <ul class="space-y-2 text-slate-700">
+                  <li class="flex items-start">
+                    <i class="fas fa-arrow-trend-up text-blue-600 mt-1 mr-3"></i>
+                    Accelerated digital transformation initiatives
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-users text-blue-600 mt-1 mr-3"></i>
+                    AI talent shortage (85M skilled workers needed)
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-chart-line text-blue-600 mt-1 mr-3"></i>
+                    Increasing AI adoption across industries
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Canadian AI Market</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Applied AI Market 2024</span>
+                  <span class="font-bold text-blue-900">$10.5B</span>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-slate-50 rounded-lg">
+                  <span class="font-medium">Projected 2035</span>
+                  <span class="font-bold text-blue-900">$92.5B</span>
+                </div>
+                <div class="flex justify-between items-center p-4 bg-blue-50 rounded-lg">
+                  <span class="font-medium">CAGR 2025-2035</span>
+                  <span class="font-bold text-blue-900">21.87%</span>
+                </div>
+              </div>
+
+              <div class="mt-8">
+                <h4 class="font-bold text-slate-900 mb-4">Canadian Advantages</h4>
+                <ul class="space-y-2 text-slate-700">
+                  <li class="flex items-start">
+                    <i class="fas fa-university text-blue-600 mt-1 mr-3"></i>
+                    World-class AI research (Mila, Vector Institute)
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-flag text-blue-600 mt-1 mr-3"></i>
+                    Pan-Canadian AI Strategy
+                  </li>
+                  <li class="flex items-start">
+                    <i class="fas fa-dollar-sign text-blue-600 mt-1 mr-3"></i>
+                    $550B expected GDP contribution by 2030
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Competitive Landscape -->
+      <section id="competitive-landscape" class="px-8 py-16 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Competitive Landscape</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Global Leaders</h3>
+              <div class="space-y-4">
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Accenture, Deloitte, IBM, McKinsey</h4>
+                  <p class="text-sm text-slate-600 mt-2">Large-scale, end-to-end AI transformation services with established client bases.</p>
+                </div>
+              </div>
+
+              <div class="bg-blue-50 p-4 rounded-lg">
+                <h4 class="font-bold text-slate-900 mb-2">Strengths</h4>
+                <ul class="text-sm text-slate-700 space-y-1">
+                  <li>• Global brand recognition</li>
+                  <li>• Extensive resources and talent pools</li>
+                  <li>• Comprehensive service offerings</li>
+                </ul>
+              </div>
+
+              <div class="bg-orange-50 p-4 rounded-lg">
+                <h4 class="font-bold text-slate-900 mb-2">Weaknesses</h4>
+                <ul class="text-sm text-slate-700 space-y-1">
+                  <li>• Higher fee structures</li>
+                  <li>• Less agility and personalization</li>
+                  <li>• Slower innovation cycles</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Canadian Players</h3>
+              <div class="space-y-4">
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Coveo</h4>
+                  <p class="text-sm text-slate-600 mt-2">AI-powered search and personalization platform</p>
+                </div>
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Agency 7</h4>
+                  <p class="text-sm text-slate-600 mt-2">Edmonton-based AI automation agency</p>
+                </div>
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Distyl AI</h4>
+                  <p class="text-sm text-slate-600 mt-2">Enterprise AI company focusing on GenAI implementation</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-6 rounded-lg">
+            <h3 class="serif text-xl font-bold text-slate-900 mb-4">Competitive Differentiation</h3>
+            <div class="grid md:grid-cols-3 gap-6">
+              <div class="text-center">
+                <i class="fas fa-robot text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Agentic AI Focus</h4>
+                <p class="text-sm text-slate-600">Specialized expertise in autonomous AI systems beyond basic automation</p>
+              </div>
+              <div class="text-center">
+                <i class="fas fa-chart-line text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Rapid ROI</h4>
+                <p class="text-sm text-slate-600">3-6 month ROI targets with clear value demonstration</p>
+              </div>
+              <div class="text-center">
+                <i class="fas fa-maple-leaf text-3xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Canadian Expertise</h4>
+                <p class="text-sm text-slate-600">Deep understanding of local market and compliance requirements</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Service Offerings -->
+      <section id="service-offerings" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Service Offering Catalog</h2>
+
+          <div class="mb-12">
+            <div class="mermaid-container">
+              <div class="mermaid-controls">
+                <button class="mermaid-control-btn zoom-in" title="放大">
+                  <i class="fas fa-search-plus"></i>
+                </button>
+                <button class="mermaid-control-btn zoom-out" title="缩小">
+                  <i class="fas fa-search-minus"></i>
+                </button>
+                <button class="mermaid-control-btn reset-zoom" title="重置">
+                  <i class="fas fa-expand-arrows-alt"></i>
+                </button>
+                <button class="mermaid-control-btn fullscreen" title="全屏查看">
+                  <i class="fas fa-expand"></i>
+                </button>
+              </div>
+              <div class="mermaid">
+                graph TD
+                A[&#34;OPENFLOWS.AI Services&#34;] --&gt; B[&#34;Strategy&#34;]
+                A --&gt; C[&#34;Build&#34;]
+                A --&gt; D[&#34;Operate&#34;]
+
+                B --&gt; B1[&#34;AI Strategy Workshops&#34;]
+                B --&gt; B2[&#34;Opportunity Identification&#34;]
+                B --&gt; B3[&#34;Roadmap Development&#34;]
+
+                C --&gt; C1[&#34;Automation Workflow Design&#34;]
+                C --&gt; C2[&#34;RPA Implementation&#34;]
+                C --&gt; C3[&#34;AI-Powered Automation&#34;]
+
+                D --&gt; D1[&#34;Agent-Based Applications&#34;]
+                D --&gt; D2[&#34;AI Center of Excellence&#34;]
+                D --&gt; D3[&#34;Ongoing Support&#34;]
+              </div>
+            </div>
+          </div>
+
+          <div class="grid lg:grid-cols-3 gap-8">
+            <div class="space-y-6">
+              <div class="text-center mb-6">
+                <i class="fas fa-lightbulb text-4xl text-blue-600 mb-4"></i>
+                <h3 class="serif text-2xl font-bold text-slate-900">Strategy</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">AI Strategy Workshops</h4>
+                  <p class="text-sm text-slate-600">Interactive sessions to explore AI potential and identify high-impact use cases</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Opportunity Identification</h4>
+                  <p class="text-sm text-slate-600">Comprehensive analysis to pinpoint processes ripe for AI automation</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Roadmap Development</h4>
+                  <p class="text-sm text-slate-600">Strategic implementation plan with clear milestones and ROI targets</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="text-center mb-6">
+                <i class="fas fa-cogs text-4xl text-blue-600 mb-4"></i>
+                <h3 class="serif text-2xl font-bold text-slate-900">Build</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Automation Workflow Design</h4>
+                  <p class="text-sm text-slate-600">Process discovery and analysis for intelligent automation solutions</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">RPA Implementation</h4>
+                  <p class="text-sm text-slate-600">Robotic Process Automation for rule-based, repetitive tasks</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">AI-Powered Automation</h4>
+                  <p class="text-sm text-slate-600">Cognitive automation with machine learning and NLP capabilities</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <div class="text-center mb-6">
+                <i class="fas fa-rocket text-4xl text-blue-600 mb-4"></i>
+                <h3 class="serif text-2xl font-bold text-slate-900">Operate</h3>
+              </div>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Agent-Based Applications</h4>
+                  <p class="text-sm text-slate-600">Autonomous AI systems for complex decision-making and task execution</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">AI Center of Excellence</h4>
+                  <p class="text-sm text-slate-600">Establish internal AI capabilities and governance frameworks</p>
+                </div>
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Ongoing Support</h4>
+                  <p class="text-sm text-slate-600">Continuous improvement and maintenance services</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Industry Verticals -->
+      <section id="industry-verticals" class="px-8 py-16 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Industry Verticals</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Healthcare</h3>
+              <img src="https://kimi-web-img.moonshot.cn/img/www.belllawfirm.com/34f658f257cea2692f75f94ad888b427d55464f3.jpg" alt="AI applications in healthcare" class="w-full rounded-lg" size="medium" aspect="wide" style="photo" query="AI healthcare" referrerpolicy="no-referrer" data-modified="1" data-score="11590.00"/>
+
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-2">Pain Points Addressed</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• High administrative burden on medical staff</li>
+                    <li>• Inefficiencies in patient communication</li>
+                    <li>• Delays in diagnostic processes</li>
+                    <li>• Managing complex patient data</li>
+                  </ul>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Potential ROI</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• 60% reduction in documentation time</li>
+                    <li>• 30% reduction in hospital readmissions</li>
+                    <li>• Improved patient adherence</li>
+                    <li>• Enhanced diagnostic accuracy</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Finance</h3>
+              <img src="https://kimi-web-img.moonshot.cn/img/res.cloudinary.com/32f063ecfe704fb3b6a0f1735a2149815eb505fd.jpg" alt="AI in financial services" class="w-full rounded-lg" size="medium" aspect="wide" style="photo" query="AI finance" referrerpolicy="no-referrer" data-modified="1" data-score="11598.00"/>
+
+              <div class="space-y-4">
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-2">Pain Points Addressed</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• High cost of regulatory compliance</li>
+                    <li>• Sophisticated financial fraud</li>
+                    <li>• Demand for 24/7 customer service</li>
+                    <li>• Need for faster trading decisions</li>
+                  </ul>
+                </div>
+
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Potential ROI</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• 60-80% reduction in compliance time</li>
+                    <li>• Up to 70% reduction in fraud</li>
+                    <li>• 98% issue resolution rate (like Erica)</li>
+                    <li>• Cost savings in finance operations</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-6">
+            <div class="p-6 bg-slate-50 rounded-lg">
+              <i class="fas fa-industry text-3xl text-blue-600 mb-4"></i>
+              <h4 class="font-bold text-slate-900 mb-3">Manufacturing</h4>
+              <p class="text-sm text-slate-600 mb-3">Predictive maintenance, quality control, and supply chain optimization</p>
+              <div class="text-xs text-slate-500">30% reduction in downtime</div>
+            </div>
+
+            <div class="p-6 bg-slate-50 rounded-lg">
+              <i class="fas fa-truck text-3xl text-blue-600 mb-4"></i>
+              <h4 class="font-bold text-slate-900 mb-3">Logistics</h4>
+              <p class="text-sm text-slate-600 mb-3">Route optimization, inventory management, and risk monitoring</p>
+              <div class="text-xs text-slate-500">15% transportation cost savings</div>
+            </div>
+
+            <div class="p-6 bg-slate-50 rounded-lg">
+              <i class="fas fa-shopping-cart text-3xl text-blue-600 mb-4"></i>
+              <h4 class="font-bold text-slate-900 mb-3">Retail &amp; E-commerce</h4>
+              <p class="text-sm text-slate-600 mb-3">Personalization, dynamic pricing, and automated customer service</p>
+              <div class="text-xs text-slate-500">40% reduction in cart abandonment</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Go-to-Market -->
+      <section id="go-to-market" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Go-to-Market Strategy</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Target Market</h3>
+
+              <div class="space-y-4">
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">SMBs</h4>
+                  <p class="text-sm text-slate-600 mt-1">Agile, founder-led businesses seeking quick ROI and competitive edge</p>
+                  <div class="mt-2 text-xs text-blue-600">$15K - $50K projects</div>
+                </div>
+
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Mid-Market</h4>
+                  <p class="text-sm text-slate-600 mt-1">Growing companies needing scalable, integrated AI solutions</p>
+                  <div class="mt-2 text-xs text-blue-600">$35K - $75K projects</div>
+                </div>
+
+                <div class="p-4 border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900">Enterprise</h4>
+                  <p class="text-sm text-slate-600 mt-1">Large organizations seeking strategic AI transformation partners</p>
+                  <div class="mt-2 text-xs text-blue-600">$75K+ projects</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Lead Generation Channels</h3>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Digital Marketing</h4>
+                  <ul class="text-sm text-slate-600 space-y-1">
+                    <li>• SEO-optimized content marketing</li>
+                    <li>• LinkedIn thought leadership</li>
+                    <li>• Webinars and industry reports</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Outreach &amp; Partnerships</h4>
+                  <ul class="text-sm text-slate-600 space-y-1">
+                    <li>• Targeted email campaigns</li>
+                    <li>• Strategic technology partnerships</li>
+                    <li>• Industry event participation</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 bg-white border border-slate-200 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Referral Programs</h4>
+                  <ul class="text-sm text-slate-600 space-y-1">
+                    <li>• Client referral incentives</li>
+                    <li>• Partner co-marketing</li>
+                    <li>• Industry community engagement</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-8 rounded-lg">
+            <h3 class="serif text-2xl font-bold text-slate-900 mb-6">Pricing Models</h3>
+
+            <div class="grid md:grid-cols-4 gap-6">
+              <div class="text-center">
+                <i class="fas fa-clock text-2xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Hourly</h4>
+                <p class="text-sm text-slate-600">Advisory &amp; short-term engagements</p>
+              </div>
+
+              <div class="text-center">
+                <i class="fas fa-project-diagram text-2xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Project-Based</h4>
+                <p class="text-sm text-slate-600">Defined deliverables with clear scope</p>
+              </div>
+
+              <div class="text-center">
+                <i class="fas fa-chart-line text-2xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Value-Based</h4>
+                <p class="text-sm text-slate-600">Tied to specific business outcomes</p>
+              </div>
+
+              <div class="text-center">
+                <i class="fas fa-sync text-2xl text-blue-600 mb-3"></i>
+                <h4 class="font-bold text-slate-900">Retainer</h4>
+                <p class="text-sm text-slate-600">Ongoing support and maintenance</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Operational Execution -->
+      <section id="operational-execution" class="px-8 py-16 bg-white">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Operational Execution</h2>
+
+          <div class="grid lg:grid-cols-2 gap-8 mb-12">
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Business Model</h3>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-slate-50 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Revenue Streams</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• AI Consulting Services</li>
+                    <li>• Automation Implementation</li>
+                    <li>• Agent-Based Application Development</li>
+                    <li>• Training &amp; Enablement</li>
+                    <li>• Ongoing Support &amp; Maintenance</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 bg-blue-50 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Financial Projections</h4>
+                  <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <div class="font-medium">Year 1 Target</div>
+                      <div class="text-blue-900 font-bold">10-15 clients</div>
+                    </div>
+                    <div>
+                      <div class="font-medium">Avg. Project Size</div>
+                      <div class="text-blue-900 font-bold">$50K</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="space-y-6">
+              <h3 class="serif text-2xl font-bold text-slate-900">Delivery Excellence</h3>
+
+              <div class="space-y-4">
+                <div class="p-4 bg-slate-50 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Agile Methodology</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Sprint planning and execution</li>
+                    <li>• Daily stand-ups and reviews</li>
+                    <li>• Continuous client feedback</li>
+                    <li>• Iterative development</li>
+                  </ul>
+                </div>
+
+                <div class="p-4 bg-green-50 rounded-lg">
+                  <h4 class="font-bold text-slate-900 mb-2">Quality Assurance</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Automated testing frameworks</li>
+                    <li>• User acceptance testing</li>
+                    <li>• Performance and security testing</li>
+                    <li>• Continuous monitoring</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-slate-50 p-8 rounded-lg">
+            <h3 class="serif text-2xl font-bold text-slate-900 mb-6">Key Performance Indicators</h3>
+
+            <div class="grid md:grid-cols-3 gap-8">
+              <div>
+                <h4 class="font-bold text-slate-900 mb-4">Financial Metrics</h4>
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span class="text-sm">MRR</span>
+                    <span class="text-sm font-bold">Monthly Recurring Revenue</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">CAC</span>
+                    <span class="text-sm font-bold">Customer Acquisition Cost</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">ACV</span>
+                    <span class="text-sm font-bold">Average Contract Value</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">LTV</span>
+                    <span class="text-sm font-bold">Lifetime Value</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-slate-900 mb-4">Operational Metrics</h4>
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span class="text-sm">Pipeline Velocity</span>
+                    <span class="text-sm font-bold">Lead to Close Time</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">Delivery Time</span>
+                    <span class="text-sm font-bold">Project Completion</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">Utilization Rate</span>
+                    <span class="text-sm font-bold">Resource Efficiency</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">On-Time Delivery</span>
+                    <span class="text-sm font-bold">Schedule Adherence</span>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-bold text-slate-900 mb-4">Customer Success</h4>
+                <div class="space-y-3">
+                  <div class="flex justify-between">
+                    <span class="text-sm">Retention Rate</span>
+                    <span class="text-sm font-bold">Client Loyalty</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">CSAT</span>
+                    <span class="text-sm font-bold">Customer Satisfaction</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">NPS</span>
+                    <span class="text-sm font-bold">Net Promoter Score</span>
+                  </div>
+                  <div class="flex justify-between">
+                    <span class="text-sm">Referenceability</span>
+                    <span class="text-sm font-bold">Client Advocacy</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="section-divider"></div>
+
+      <!-- Implementation Roadmap -->
+      <section id="implementation-roadmap" class="px-8 py-16">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="serif text-4xl font-bold text-slate-900 mb-8">Implementation Roadmap</h2>
+
+          <div class="space-y-12">
+            <!-- Phase 1 -->
+            <div class="border-l-4 border-blue-600 pl-8">
+              <div class="flex items-center mb-4">
+                <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4">1</div>
+                <h3 class="serif text-2xl font-bold text-slate-900">Foundation and Market Entry</h3>
+                <span class="ml-auto text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Months 1-3</span>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-3">Objectives</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Establish legal and operational infrastructure</li>
+                    <li>• Build core team (3-5 AI consultants/developers)</li>
+                    <li>• Finalize service offerings and pricing</li>
+                    <li>• Secure 1-2 pilot clients</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-3">Key Deliverables</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Company registration and legal setup</li>
+                    <li>• Basic website and marketing collateral</li>
+                    <li>• CRM system implementation</li>
+                    <li>• First client contract signed</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <span class="font-bold text-green-800">Milestone:</span>
+                  <span class="text-green-700"> First pilot project delivered by end of Month 3</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Phase 2 -->
+            <div class="border-l-4 border-blue-600 pl-8">
+              <div class="flex items-center mb-4">
+                <div class="bg-blue-600 text-white rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold mr-4">2</div>
+                <h3 class="serif text-2xl font-bold text-slate-900">Growth and Expansion</h3>
+                <span class="ml-auto text-sm text-slate-500 bg-slate-100 px-3 py-1 rounded-full">Months 4-12</span>
+              </div>
+
+              <div class="grid md:grid-cols-3 gap-6 mb-6">
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-3">Months 4-6</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Consistent lead flow (5-10/month)</li>
+                    <li>• 3-5 new clients acquired</li>
+                    <li>• First case studies published</li>
+                    <li>• Team expansion to 7-10 members</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-3">Months 7-9</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• MRR targets established</li>
+                    <li>• 2-3 larger projects undertaken</li>
+                    <li>• Thought leadership initiatives</li>
+                    <li>• Partnerships formalized</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-bold text-slate-900 mb-3">Months 10-12</h4>
+                  <ul class="text-sm text-slate-700 space-y-1">
+                    <li>• Consistent revenue targets achieved</li>
+                    <li>• Portfolio of 8-12 successful projects</li>
+                    <li>• Strong brand recognition</li>
+                    <li>• Preparation for next growth phase</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div class="grid md:grid-cols-2 gap-4">
+                <div class="bg-green-50 p-4 rounded-lg">
+                  <span class="font-bold text-green-800">Milestone:</span>
+                  <span class="text-green-700"> Achieve profitability by end of Month 9</span>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg">
+                  <span class="font-bold text-blue-800">Milestone:</span>
+                  <span class="text-blue-700"> Secure significant enterprise client by Month 12</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-12 p-8 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-lg">
+            <h3 class="serif text-2xl font-bold mb-4">Ready to Transform Your Business with AI?</h3>
+            <p class="mb-6">OPENFLOWS.AI is positioned to lead the Canadian AI consulting market with specialized expertise in automation workflows and agentic applications.</p>
+            <div class="grid md:grid-cols-3 gap-6 text-center">
+              <div>
+                <i class="fas fa-rocket text-3xl mb-2"></i>
+                <div class="font-bold">Rapid ROI</div>
+                <div class="text-sm opacity-90">3-6 month results</div>
+              </div>
+              <div>
+                <i class="fas fa-cogs text-3xl mb-2"></i>
+                <div class="font-bold">Advanced Automation</div>
+                <div class="text-sm opacity-90">Beyond basic RPA</div>
+              </div>
+              <div>
+                <i class="fas fa-maple-leaf text-3xl mb-2"></i>
+                <div class="font-bold">Canadian Expertise</div>
+                <div class="text-sm opacity-90">Local market focus</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer -->
+      <footer class="px-8 py-12 bg-slate-900 text-white">
+        <div class="max-w-6xl mx-auto text-center">
+          <h3 class="serif text-2xl font-bold mb-4">OPENFLOWS.AI</h3>
+          <p class="text-slate-400 mb-6">Canadian Headquarters • Global AI Ambition</p>
+          <div class="text-sm text-slate-500">
+            <p>Strategic Roadmap Presentation • 2025</p>
+            <p class="mt-2">Data sources: <a href="#ref-3" class="text-blue-400 hover:underline">[3]</a>
+              <a href="#ref-227" class="text-blue-400 hover:underline">[227]</a>
+              <a href="#ref-230" class="text-blue-400 hover:underline">[230]</a>
+              <a href="#ref-602" class="text-blue-400 hover:underline">[602]</a>
+            </p>
+          </div>
+        </div>
+      </footer>
+    </main>
+
+    <script>
+        // Initialize Mermaid
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'base',
+            themeVariables: {
+                primaryColor: '#f8fafc',
+                primaryTextColor: '#0f172a',
+                primaryBorderColor: '#1e3a8a',
+                lineColor: '#64748b',
+                secondaryColor: '#e2e8f0',
+                tertiaryColor: '#f1f5f9',
+                background: '#ffffff',
+                mainBkg: '#f8fafc',
+                secondaryBkg: '#e2e8f0',
+                tertiaryBkg: '#f1f5f9'
+            },
+            flowchart: {
+                useMaxWidth: true,
+                htmlLabels: true,
+                curve: 'basis'
+            }
+        });
+
+        // Initialize Mermaid Controls for zoom and pan
+        function initializeMermaidControls() {
+            const containers = document.querySelectorAll('.mermaid-container');
+
+            containers.forEach(container => {
+            const mermaidElement = container.querySelector('.mermaid');
+            let scale = 1;
+            let isDragging = false;
+            let startX, startY, translateX = 0, translateY = 0;
+
+            // 触摸相关状态
+            let isTouch = false;
+            let touchStartTime = 0;
+            let initialDistance = 0;
+            let initialScale = 1;
+            let isPinching = false;
+
+            // Zoom controls
+            const zoomInBtn = container.querySelector('.zoom-in');
+            const zoomOutBtn = container.querySelector('.zoom-out');
+            const resetBtn = container.querySelector('.reset-zoom');
+            const fullscreenBtn = container.querySelector('.fullscreen');
+
+            function updateTransform() {
+                mermaidElement.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`;
+
+                if (scale > 1) {
+                container.classList.add('zoomed');
+                } else {
+                container.classList.remove('zoomed');
+                }
+
+                mermaidElement.style.cursor = isDragging ? 'grabbing' : 'grab';
+            }
+
+            if (zoomInBtn) {
+                zoomInBtn.addEventListener('click', () => {
+                scale = Math.min(scale * 1.25, 4);
+                updateTransform();
+                });
+            }
+
+            if (zoomOutBtn) {
+                zoomOutBtn.addEventListener('click', () => {
+                scale = Math.max(scale / 1.25, 0.3);
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+                updateTransform();
+                });
+            }
+
+            if (resetBtn) {
+                resetBtn.addEventListener('click', () => {
+                scale = 1;
+                translateX = 0;
+                translateY = 0;
+                updateTransform();
+                });
+            }
+
+            if (fullscreenBtn) {
+                fullscreenBtn.addEventListener('click', () => {
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+                });
+            }
+
+            // Mouse Events
+            mermaidElement.addEventListener('mousedown', (e) => {
+                if (isTouch) return; // 如果是触摸设备，忽略鼠标事件
+
+                isDragging = true;
+                startX = e.clientX - translateX;
+                startY = e.clientY - translateY;
+                mermaidElement.style.cursor = 'grabbing';
+                updateTransform();
+                e.preventDefault();
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (isDragging && !isTouch) {
+                translateX = e.clientX - startX;
+                translateY = e.clientY - startY;
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (isDragging && !isTouch) {
+                isDragging = false;
+                mermaidElement.style.cursor = 'grab';
+                updateTransform();
+                }
+            });
+
+            // 获取两点之间的距离
+            function getTouchDistance(touch1, touch2) {
+                return Math.hypot(
+                touch2.clientX - touch1.clientX,
+                touch2.clientY - touch1.clientY
+                );
+            }
+
+            // Touch Events - 触摸事件处理
+            mermaidElement.addEventListener('touchstart', (e) => {
+                isTouch = true;
+                touchStartTime = Date.now();
+
+                if (e.touches.length === 1) {
+                // 单指拖动
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+
+                } else if (e.touches.length === 2) {
+                // 双指缩放
+                isPinching = true;
+                isDragging = false;
+
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                initialDistance = getTouchDistance(touch1, touch2);
+                initialScale = scale;
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchmove', (e) => {
+                if (e.touches.length === 1 && isDragging && !isPinching) {
+                // 单指拖动
+                const touch = e.touches[0];
+                translateX = touch.clientX - startX;
+                translateY = touch.clientY - startY;
+                updateTransform();
+
+                } else if (e.touches.length === 2 && isPinching) {
+                // 双指缩放
+                const touch1 = e.touches[0];
+                const touch2 = e.touches[1];
+                const currentDistance = getTouchDistance(touch1, touch2);
+
+                if (initialDistance > 0) {
+                    const newScale = Math.min(Math.max(
+                    initialScale * (currentDistance / initialDistance),
+                    0.3
+                    ), 4);
+                    scale = newScale;
+                    updateTransform();
+                }
+                }
+
+                e.preventDefault();
+            }, { passive: false });
+
+            mermaidElement.addEventListener('touchend', (e) => {
+                // 重置状态
+                if (e.touches.length === 0) {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                // 延迟重置isTouch，避免鼠标事件立即触发
+                setTimeout(() => {
+                    isTouch = false;
+                }, 100);
+                } else if (e.touches.length === 1 && isPinching) {
+                // 从双指变为单指，切换为拖动模式
+                isPinching = false;
+                isDragging = true;
+
+                const touch = e.touches[0];
+                startX = touch.clientX - translateX;
+                startY = touch.clientY - translateY;
+                }
+
+                updateTransform();
+            });
+
+            mermaidElement.addEventListener('touchcancel', (e) => {
+                isDragging = false;
+                isPinching = false;
+                initialDistance = 0;
+
+                setTimeout(() => {
+                isTouch = false;
+                }, 100);
+
+                updateTransform();
+            });
+
+            // Enhanced wheel zoom with better center point handling
+            container.addEventListener('wheel', (e) => {
+                e.preventDefault();
+                const rect = container.getBoundingClientRect();
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const delta = e.deltaY > 0 ? 0.9 : 1.1;
+                const newScale = Math.min(Math.max(scale * delta, 0.3), 4);
+
+                // Adjust translation to zoom towards center
+                if (newScale !== scale) {
+                const scaleDiff = newScale / scale;
+                translateX = translateX * scaleDiff;
+                translateY = translateY * scaleDiff;
+                scale = newScale;
+
+                if (scale <= 1) {
+                    translateX = 0;
+                    translateY = 0;
+                }
+
+                updateTransform();
+                }
+            });
+
+            // Initialize display
+            updateTransform();
+            });
+        }
+
+        // Initialize Mermaid Controls when DOM is loaded
+        document.addEventListener('DOMContentLoaded', initializeMermaidControls);
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Mobile menu toggle
+        const toggleButton = document.createElement('button');
+        toggleButton.innerHTML = '<i class="fas fa-bars"></i>';
+        toggleButton.className = 'fixed top-4 left-4 z-50 lg:hidden bg-white p-3 rounded-lg shadow-lg';
+        document.body.appendChild(toggleButton);
+
+        toggleButton.addEventListener('click', () => {
+            document.getElementById('toc').classList.toggle('open');
+        });
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const toc = document.getElementById('toc');
+            if (!toc.contains(e.target) && !toggleButton.contains(e.target)) {
+                toc.classList.remove('open');
+            }
+        });
+
+        // Highlight active section in TOC
+        const sections = document.querySelectorAll('section[id]');
+        const tocLinks = document.querySelectorAll('.toc-fixed a');
+
+        function highlightActiveSection() {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            tocLinks.forEach(link => {
+                link.classList.remove('bg-blue-100', 'text-blue-900');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('bg-blue-100', 'text-blue-900');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', highlightActiveSection);
+        highlightActiveSection(); // Initial call
+    </script>
+  
+
+</body></html>
